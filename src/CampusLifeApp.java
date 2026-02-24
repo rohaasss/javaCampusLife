@@ -63,7 +63,7 @@ public class CampusLifeApp {
         System.out.println();
 
         System.out.println("TOTAL TIME ON EVERY COURSE");
-        Course[] allCourses = {oop, discreteMath, english};
+        Course[] allCourses = {backend, python, german};
 
         for (Course course : allCourses) {
             double totalHours = 0;
