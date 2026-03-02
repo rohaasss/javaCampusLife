@@ -108,5 +108,62 @@ public class CampusLifeApp {
         System.out.println("Completed: " + completed);
         System.out.println("Urgent remaining: " + urgent);
 
+        //new home assignment
+
+
+        ArrayList<PlanItem> planItems = new ArrayList<>();
+        planItems.add(new Assignment("Lab 10: REST API", "Backend", 2, 4));
+        planItems.add(new Assignment("Homework 5: Loops", "Python", 5, 3));
+        planItems.add(new ExamPreparation("Final Exam", "German", 3, 8));
+        planItems.add(new ExamPreparation("Midterm", "Backend", 1, 6));
+        planItems.add(new ClubEvent("Hackathon", "Room 205", 2, 10));
+        planItems.add(new ClubEvent("German Film Club", "Konya hall", 4, 2));
+
+        System.out.println();
+        System.out.println("NEW VERSION-PlanItem Hierarchy");
+        System.out.println();
+        System.out.println("ALL PLAN ITEMS");
+        for (PlanItem item : planItems) {
+            System.out.println(item);
+        }
+        System.out.println();
+
+        System.out.println("URGENT ITEMS");
+        for (PlanItem item : planItems) {
+            if (item.isUrgent()) {
+                System.out.println(item.getCategory() + ": " + item.getTitle() + " (URGENT!)");
+            }
+        }
+        System.out.println();
+
+        int remaining = 0;
+        for (PlanItem item : planItems) {
+            if (!item.isCompleted()) {
+                remaining += item.getEstimatedHours();
+            }
+        }
+        System.out.println("Total remaining hours: " + remaining);
+        System.out.println();
+
+        PlanItem mostUrgent = null;
+        int min = Integer.MAX_VALUE;
+        for (PlanItem item : planItems) {
+            if (!item.isCompleted() && item.getDaysUntil() < min) {
+                min = item.getDaysUntil();
+                mostUrgent = item;
+            }
+        }
+        if (mostUrgent != null) {
+            System.out.println("Most urgent: " + mostUrgent.getTitle() + " (" + mostUrgent.getCategory() + ") in " + min + " days");
+        }
+        System.out.println();
+
+        System.out.println("MARKING FIRST PLAN ITEM AS COMPLETED");
+        PlanItem first = planItems.get(0);
+        System.out.println("BEFORE: " + first);
+        first.markCompleted();
+        System.out.println("AFTER: " + first);
+        System.out.println("Urgent now? " + first.isUrgent());
     }
+
 }
